@@ -9,10 +9,13 @@ class Bijection(dict):
         self.__dict__['v2k'] = {}
 
     def __getattr__(self, name):
-        if name in self.v2k:
-            return self.v2k.__getitem__(name)
+        return self.__getitem__(name)
+
+    def __getitem__(self, key):
+        if key in self.v2k:
+            return self.v2k.__getitem__(key)
         else:
-            return self.__getitem__(name)
+            return super().__getitem__(key)
 
     def __setitem__(self, name, value):
         if value in self.v2k:
